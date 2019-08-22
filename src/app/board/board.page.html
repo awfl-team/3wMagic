@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Board
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="board-container">
+    <div *ngFor="let player of this.players"
+          class="board-player-container-outer"
+         [ngClass]="{
+          'players-mode-solo': this.players.length === 1,
+          'players-mode-versus': this.players.length === 2,
+          'players-mode-odd': this.players.length % 2 === 1,
+          'players-mode-even': this.players.length % 2 === 0
+        }"
+        [ngStyle]="{'height': 'calc('+this.playerBoardHeight + '% - 15px)'}"
+    >
+      <app-player-board
+        [player]="player"
+        class="board-player-container-inner"
+        [ngStyle]="{'height': 'calc('+this.playerBoardHeightInner + '% - 15px)'}"
+      >
+      </app-player-board>
+    </div>
+  </div>
+</ion-content>

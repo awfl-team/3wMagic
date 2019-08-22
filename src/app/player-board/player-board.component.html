@@ -1,0 +1,83 @@
+<div class="player-container-name">
+  <ion-text class="player-name">{{player.name}}</ion-text>
+</div>
+
+<div class="player-container-action-life">
+  <ion-fab-button class="life-button-remove" [disabled]="player.life <= 0" (click)="removePlayerLife()">
+    <ion-icon name="remove"></ion-icon>
+  </ion-fab-button>
+  <ion-text class="player-life">{{player.life}}</ion-text>
+  <ion-fab-button class="life-button-add" (click)="addPlayerLife()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</div>
+<div class="player-container-action-counter-container-block">
+  <ion-fab-button
+      class="life-button-remove"
+      [disabled]="
+      this.counterFocused === this.counterType.COMMANDER && player.commanderCounter <= 0  ||
+      this.counterFocused === this.counterType.PLANESWALKER && player.planeswalkerCounter <= 0||
+      this.counterFocused === this.counterType.TOKEN && player.tokenCounter <= 0 ||
+      this.counterFocused === this.counterType.INFECT && player.infectCounter <= 0"
+      (click)="removeCounter()" [ngClass]="{'counter-focused': isCounterFocused
+      }">
+    <ion-icon name="remove"></ion-icon>
+  </ion-fab-button>
+  <div class="player-container-action-counter">
+    <div class="player-container-action-counter-container commander"
+         (click)="selectCounterToManage(this.counterType.COMMANDER)"
+         [ngClass]="{
+           'counter-focused-commander': isCounterFocused && counterFocused ===
+            this.counterType.COMMANDER,
+           'counter-focused': isCounterFocused
+         }">
+      <div>
+        <ion-img src="./assets/icon/mtgSet/commander.svg"></ion-img>
+        <ion-text>{{player.commanderCounter}}</ion-text>
+      </div>
+      <ion-text>Commander</ion-text>
+    </div>
+    <div class="player-container-action-counter-container planeswalker"
+         (click)="selectCounterToManage(this.counterType.PLANESWALKER)"
+         [ngClass]="{
+           'counter-focused-planeswalker': isCounterFocused && counterFocused === this.counterType.PLANESWALKER,
+           'counter-focused': isCounterFocused}">
+      <div>
+        <ion-img src="./assets/icon/mtgSet/planeswalker.svg"></ion-img>
+        <ion-text>{{player.planeswalkerCounter}}</ion-text>
+      </div>
+      <ion-text>Planeswalker</ion-text>
+    </div>
+    <div class="player-container-action-counter-container token"
+         (click)="selectCounterToManage(this.counterType.TOKEN)"
+         [ngClass]="{
+           'counter-focused-token': isCounterFocused && counterFocused === this.counterType.TOKEN,
+           'counter-focused': isCounterFocused
+         }">
+      <div>
+        <ion-img src="./assets/icon/mtgSet/token.svg"></ion-img>
+        <ion-text>{{player.tokenCounter}}</ion-text>
+      </div>
+      <ion-text>Tokens</ion-text>
+    </div>
+    <div class="player-container-action-counter-container infect"
+         (click)="selectCounterToManage(this.counterType.INFECT)"
+         [ngClass]="{
+           'counter-focused-infect': isCounterFocused && counterFocused ===
+           this.counterType.INFECT,
+           'counter-focused': isCounterFocused
+         }">
+      <div>
+        <ion-img src="./assets/icon/mtgSet/infect.svg"></ion-img>
+        <ion-text>{{player.infectCounter}}</ion-text>
+      </div>
+      <ion-text>Infect</ion-text>
+    </div>
+
+  </div>
+  <ion-fab-button
+      class="life-button-add" (click)="addCounter()"
+      [ngClass]="{'counter-focused': isCounterFocused  }">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</div>

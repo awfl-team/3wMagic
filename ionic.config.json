@@ -1,5 +1,7 @@
 {
   "name": "3wMagic-Ionic",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
