@@ -11,8 +11,7 @@ export const initialState: State = {
 
 const nbPlayersReducer = createReducer(
   initialState,
-  on(NbPlayersActions.increment, state => ({ ...state, nbPlayers: state.nbPlayers + 1 })),
-  on(NbPlayersActions.decrement, state => ({ ...state, nbPlayers: state.nbPlayers - 1 })),
+  on(NbPlayersActions.updateNbPlayers, (state, { nbPlayers }) => ({ ...state, nbPlayers })),
 );
 
 export function reducer(state: State | undefined, action: Action) {

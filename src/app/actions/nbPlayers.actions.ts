@@ -1,4 +1,3 @@
-import {createAction} from '@ngrx/store';
+import {createAction, props} from '@ngrx/store';
 
-export const increment = createAction('Nb Players Increment');
-export const decrement = createAction('Nb Players Decrement');
+export const updateNbPlayers = createAction('Update nbPlayers', props<{ nbPlayers: number }>());

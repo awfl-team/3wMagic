@@ -13,16 +13,48 @@
   <ion-list color="dark">
     <ion-item color="dark">
       <ion-icon name="people" slot="start"></ion-icon>
-      <ion-range min="1" max="4" step="1" [value]="nbPlayersRangeValue" snaps="true"
+      <ion-range min="1" max="6" step="1" [value]="nbPlayersRangeValue" snaps="true"
                  (ionChange)="handleNbPlayersChange($event)"></ion-range>
       <div class="item-note" slot="end">
-        {{nbPlayersRangeValue}}
+        <ion-text>{{nbPlayersRangeValue}}</ion-text>
+      </div>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-icon name="heart" slot="start"></ion-icon>
+      <ion-range min="1" max="40" step="1" [value]="lifeSettingRangeValue" snaps="true"
+                 (ionChange)="handleLifeSettingChange($event)"></ion-range>
+      <div class="item-note" slot="end">
+        <ion-text>{{lifeSettingRangeValue}}</ion-text>
+      </div>
+    </ion-item>
+    <ion-item color="dark" lines="full">
+      <ion-icon name="pulse" slot="start"></ion-icon>
+      <ion-label>Heart Beat mode</ion-label>
+
+      <div class="item-note" slot="end">
+        <ion-toggle color="primary" (ionChange)="handleHeartBeatModeChange($event)"
+                                                    [checked]="heartBeatModeIsActive"></ion-toggle>
+      </div>
+    </ion-item>
+    <ion-item color="dark" lines="full">
+      <ion-icon name="stopwatch" slot="start"></ion-icon>
+      <ion-label>Time Mode</ion-label>
+      <div class="item-note" slot="end">
+        <ion-toggle color="primary" (ionChange)="handleTimeModeChange($event)"
+                    [checked]="timeModeIsActive"></ion-toggle>
+      </div>
+    </ion-item>
+    <ion-item color="dark" *ngIf="timeModeIsActive">
+      <ion-icon name="hourglass" slot="start"></ion-icon>
+      <ion-range min="10" max="600" step="10" [value]="turnTimeSet" snaps="true"
+                 (ionChange)="handleTimeRangeChange($event)"></ion-range>
+
+      <div class="item-note" slot="end">
+        <ion-text>
+          {{turnTimeMinute | number:'2.0-0'}}m
+          {{turnTimeSecond | number:'2.0-0'}}s
+        </ion-text>
       </div>
     </ion-item>
   </ion-list>
-  <!--
-    <div *ngIf="selectedItem" padding>
-      You navigated here from <b>{{selectedItem.title }}</b>
-    </div>
-  -->
 </ion-content>

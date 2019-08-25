@@ -18,6 +18,11 @@ export class PlayerBoardComponent implements OnInit {
   public isCounterFocused: boolean;
   public counterFocused: string;
   public counterType = CounterType;
+  public lifeCounterHistoricalIsShown: boolean;
+  public lifeCounterHistoricalIsAdd: boolean;
+  public lifeCounterHistoricalAdd = 0;
+  public lifeCounterHistoricalRemove = 0;
+  public lifeCounterTimeOut: any;
 
   constructor() {
     this.isCounterFocused = false;
@@ -27,9 +32,17 @@ export class PlayerBoardComponent implements OnInit {
 
   addPlayerLife() {
     this.player.life += 1;
+    this.lifeCounterHistoricalAdd += 1;
+    this.lifeCounterHistoricalIsAdd = true;
+    this.lifeCounterHistoricalIsShown = true;
+    this.handleLifeHistorical();
   }
   removePlayerLife() {
     this.player.life -= 1;
+    this.lifeCounterHistoricalRemove += 1;
+    this.lifeCounterHistoricalIsAdd = false;
+    this.lifeCounterHistoricalIsShown = true;
+    this.handleLifeHistorical();
   }
 
   selectCounterToManage(counterName: string) {
@@ -81,5 +94,15 @@ export class PlayerBoardComponent implements OnInit {
       default :
         break;
     }
+  }
+
+  handleLifeHistorical() {
+    clearTimeout(this.lifeCounterTimeOut);
+    this.lifeCounterTimeOut = setTimeout(() => {
+      this.lifeCounterHistoricalIsShown = false;
+      this.lifeCounterHistoricalAdd = 0;
+      this.lifeCounterHistoricalRemove = 0;
+      this.lifeCounterHistoricalIsAdd = false;
+    }, 700);
   }
 }

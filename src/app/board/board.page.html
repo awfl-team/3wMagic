@@ -6,6 +6,15 @@
     <ion-title>
       Board
     </ion-title>
+    <ion-buttons slot="end" *ngIf="timeModeIsActive">
+      <ion-icon [name]="timeModeIsRunning === true ? 'pause' : 'play'" slot="start"
+                (click)="handlePlayTimeMode()"></ion-icon>
+      {{turnTimeMinute > 0 ? (turnTimeMinute| number:'2.0-0') + ('m') : null }}
+      {{turnTimeSecond | number:'2.0-0'}}s
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-icon name="refresh" slot="start" (click)="handleReset()"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -17,13 +26,19 @@
           'players-mode-solo': this.players.length === 1,
           'players-mode-versus': this.players.length === 2,
           'players-mode-odd': this.players.length % 2 === 1,
-          'players-mode-even': this.players.length % 2 === 0
+          'players-mode-even': this.players.length % 2 === 0,
+          'heartbeat-mode': this.heartBeatModeIsActive && player.life <= 5,
+          'player-dead': player.life === 0
         }"
         [ngStyle]="{'height': 'calc('+this.playerBoardHeight + '% - 15px)'}"
     >
       <app-player-board
         [player]="player"
         class="board-player-container-inner"
+        [ngClass]="{
+          'players-5': this.players.length === 5,
+          'players-6': this.players.length === 6
+        }"
         [ngStyle]="{'height': 'calc('+this.playerBoardHeightInner + '% - 15px)'}"
       >
       </app-player-board>

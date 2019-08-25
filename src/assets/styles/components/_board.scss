@@ -1,0 +1,226 @@
+ion-header {
+  ion-toolbar {
+    ion-buttons {
+      margin-left: 15px;
+    }
+  }
+}
+
+.board {
+  &-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+    background-color: #121212;
+    color: #fefefe;
+  }
+
+  &-player-container {
+    &-outer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 1 1 calc(50% - 30px);
+      margin: 5px 10px;
+      background-color: #2c2c2c;
+      border-radius: 20px;
+      position: relative;
+
+      &.heartbeat-mode:not(.player-dead) {
+        animation: pulse 5s ease-in-out infinite;
+
+        @keyframes pulse {
+          0% { background-color: #2c2c2c; }
+          43% { background-color: #2c2c2c; }
+          47% { background-color: #572a2e; }
+          50% { background-color: #2c2c2c; }
+          53% { background-color: #572a2e; }
+          57% { background-color: #2c2c2c; }
+          100% { background-color: #2c2c2c; }
+        }
+      }
+
+      &.player-dead {
+        &:nth-child(1) {
+          animation: changeBackground1 1s ease-in-out forwards;
+          @keyframes changeBackground1 {
+            0% { background-color: #2c2c2c; }
+            100% { background-color: #9C27B0; }
+          }
+        }
+        &:nth-child(2) {
+          animation: changeBackground2 1s ease-in-out forwards;
+          @keyframes changeBackground2 {
+            0% { background-color: #2c2c2c; }
+            100% { background-color: #4caf50; }
+          }
+        }
+        &:nth-child(3) {
+          animation: changeBackground3 1s ease-in-out forwards;
+          @keyframes changeBackground3 {
+            0% { background-color: #2c2c2c; }
+            100% { background-color: #2196f3; }
+          }
+        }
+        &:nth-child(4) {
+          animation: changeBackground4 1s ease-in-out forwards;
+          @keyframes changeBackground4 {
+            0% { background-color: #2c2c2c; }
+            100% { background-color: #ff9800; }
+          }
+        }
+        &:nth-child(5) {
+          animation: changeBackground5 1s ease-in-out forwards;
+          @keyframes changeBackground5 {
+            0% { background-color: #2c2c2c; }
+            100% { background-color: #5c6bc0; }
+          }
+        }
+        &:nth-child(6) {
+          animation: changeBackground6 1s ease-in-out forwards;
+          @keyframes changeBackground6 {
+            0% { background-color: #2c2c2c; }
+            100% { background-color: #ec407a; }
+          }
+        }
+      }
+
+      &:nth-child(-n+2) {
+        margin-bottom: 5px;
+        margin-top: 10px;
+      }
+
+      &:nth-child(even) {
+        margin-left: 5px;
+        border-left: 5px solid;
+        border-right: 5px solid;
+
+        .board-player-container-inner {
+          transform: rotate(-90deg);
+        }
+
+        .player-name {
+          transform: rotate(-90deg);
+
+          @media screen and (max-width: 400px) {
+            display: none;
+          }
+        }
+      }
+
+      &:nth-child(odd) {
+        margin-right: 5px;
+        border-right: 5px solid;
+        border-left: 5px solid;
+
+        .board-player-container-inner {
+          transform: rotate(90deg);
+        }
+
+        .player-name {
+          transform: rotate(90deg);
+
+          @media screen and (max-width: 400px) {
+            display: none;
+
+          }
+        }
+
+        &:last-child {
+          margin-right: 10px;
+
+          .player-name {
+            transform: rotate(0deg);
+
+            @media screen and (max-width: 400px) {
+              display: none;
+            }
+          }
+
+          .board-player-container-inner {
+            transform: rotate(0deg);
+          }
+        }
+      }
+
+      &.players-mode-even {
+        &:nth-last-child(-n+2) {
+          margin-top: 5px;
+          margin-bottom: 10px;
+        }
+      }
+
+      &.players-mode-odd {
+        &:last-child {
+          margin-top: 5px;
+          margin-bottom: 10px;
+          border-top: 5px solid;
+          border-bottom: 5px solid;
+          border-right: none;
+          border-left: none;
+        }
+      }
+
+      &.players-mode-solo {
+        margin: 10px !important;
+        height: calc(100% - 20px) !important;
+      }
+
+      &.players-mode-versus {
+        flex: 1 1 100%;
+        border-top: 5px solid;
+        border-bottom: 5px solid;
+        border-right: none;
+        border-left: none;
+
+        &:first-child {
+          margin: 10px 10px 5px 10px !important;
+
+          .board-player-container-inner {
+            transform: rotate(-180deg);
+          }
+        }
+        &:last-child {
+          margin: 5px 10px 10px 10px !important;
+
+          .board-player-container-inner {
+            transform: rotate(0deg);
+          }
+        }
+      }
+
+      &:nth-child(1) {
+        border-color: #9C27B0 !important;
+      }
+      &:nth-child(2) {
+        border-color: #4caf50 !important;
+      }
+      &:nth-child(3) {
+        border-color: #2196f3 !important;
+      }
+      &:nth-child(4) {
+        border-color: #ff9800 !important;
+      }
+      &:nth-child(5) {
+        border-color: #5c6bc0 !important;
+      }
+      &:nth-child(6) {
+        border-color: #ec407a !important;
+      }
+    }
+
+    &-inner {
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      height: 100%;
+      justify-content: center;
+      align-content: center;
+
+
+    }
+  }
+}

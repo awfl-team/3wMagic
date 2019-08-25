@@ -1,18 +1,18 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import * as NbPlayersActions from '../actions/heartbeatMode.actions';
+import * as HeartBeatModeAction from '../actions/heartbeatMode.actions';
 
 export interface State {
   isActive: boolean;
 }
 
 export const initialState: State = {
-  isActive: false
+  isActive: true
 };
 
 const heartBeatModeReducer = createReducer(
   initialState,
-  on(NbPlayersActions.activate, state => ({ ...state, nbPlayers: state.isActive = true })),
-  on(NbPlayersActions.desactivate, state => ({ ...state, nbPlayers: state.isActive = false })),
+  on(HeartBeatModeAction.updateHeartBeatMode, (state, { isActive }) => ({ ...state, isActive })),
+
 );
 
 export function reducer(state: State | undefined, action: Action) {

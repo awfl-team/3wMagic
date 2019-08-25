@@ -1,4 +1,3 @@
-import {createAction} from '@ngrx/store';
+import {createAction, props} from '@ngrx/store';
 
-export const activate = createAction('Activate Heart Beat Mode');
-export const desactivate = createAction('Desactivate Heart Beat mode');
+export const updateHeartBeatMode = createAction('Handle Heart Beat Mode', props<{ isActive: boolean }>());
