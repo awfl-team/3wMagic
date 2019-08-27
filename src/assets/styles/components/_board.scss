@@ -1,7 +1,29 @@
 ion-header {
   ion-toolbar {
-    ion-buttons {
-      margin-left: 15px;
+    ion-buttons[slot="end"] {
+      margin-left: 20px;
+      position: relative;
+
+      &:last-child {
+        margin-right: 15px;
+      }
+
+      &:not(:last-child):after {
+        content: "";
+        border: 1px solid #121212;
+        width: 0;
+        height: 22px;
+        position: absolute;
+        right: -10px;
+      }
+
+      &.no-slot {
+        font-size: 1.4em;
+      }
+
+      .dice-icon {
+        width: 23px;
+      }
     }
   }
 }
@@ -103,8 +125,6 @@ ion-header {
         }
 
         .player-name {
-          transform: rotate(-90deg);
-
           @media screen and (max-width: 400px) {
             display: none;
           }
@@ -121,8 +141,6 @@ ion-header {
         }
 
         .player-name {
-          transform: rotate(90deg);
-
           @media screen and (max-width: 400px) {
             display: none;
 
@@ -224,3 +242,20 @@ ion-header {
     }
   }
 }
+
+.custom-alert {
+  --background: #2c2c2c;
+
+  .alert-title, .alert-message {
+    color: white;
+  }
+
+  .danger-button {
+    color: var(--ion-color-danger, #F04141);
+  }
+
+  .primary-button {
+    color: var(--ion-color-primary,#3880ff);
+  }
+}
+

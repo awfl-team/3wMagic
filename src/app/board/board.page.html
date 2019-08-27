@@ -6,14 +6,19 @@
     <ion-title>
       Board
     </ion-title>
-    <ion-buttons slot="end" *ngIf="timeModeIsActive">
-      <ion-icon [name]="timeModeIsRunning === true ? 'pause' : 'play'" slot="start"
+    <ion-buttons slot="end" *ngIf="timeModeIsActive" class="countdown">
+      <ion-icon slot="start" [name]="timeModeIsRunning === true ? 'pause' : 'play'"
                 (click)="handlePlayTimeMode()"></ion-icon>
-      {{turnTimeMinute > 0 ? (turnTimeMinute| number:'2.0-0') + ('m') : null }}
+      <ion-text>{{turnTimeMinute > 0 ? (turnTimeMinute| number:'2.0-0') + ('m') : null }}
       {{turnTimeSecond | number:'2.0-0'}}s
+      </ion-text>
+      <ion-icon slot="end" name="skip-forward" (click)="handleNextPlayerCountdown()"></ion-icon>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-icon name="refresh" slot="start" (click)="handleReset()"></ion-icon>
+    <ion-buttons slot="end" class="no-slot">
+      <ion-icon name="refresh" (click)="handleReset()"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end" class="no-slot">
+      <ion-img class="dice-icon" src="./assets/icon/mtgSet/dice-6.svg" (click)="handleRandomizer($event)"></ion-img>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -34,6 +39,7 @@
     >
       <app-player-board
         [player]="player"
+        [nbPlayers]="players.length"
         class="board-player-container-inner"
         [ngClass]="{
           'players-5': this.players.length === 5,
@@ -42,6 +48,7 @@
         [ngStyle]="{'height': 'calc('+this.playerBoardHeightInner + '% - 15px)'}"
       >
       </app-player-board>
+
     </div>
   </div>
 </ion-content>

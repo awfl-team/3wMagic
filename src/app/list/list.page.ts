@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { updateNbPlayers } from '../actions/nbPlayers.actions';
 import { updateHeartBeatMode } from '../actions/heartbeatMode.actions';
 import { updateLife } from '../actions/lifeSetting.actions';
-import {updateTimeModeIsActive, updateTurnTimeSet} from '../actions/timeMode.actions';
+import { updateTimeModeIsActive, updateTurnTimeSet } from '../actions/timeMode.actions';
 
 @Component({
   selector: 'app-list',

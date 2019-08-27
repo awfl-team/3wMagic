@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
 import { BoardPage } from './board.page';
-import {PlayerBoardComponent} from '../player-board/player-board.component';
+import { PlayerBoardComponent } from '../player-board/player-board.component';
 
 const routes: Routes = [
   {

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 enum CounterType {
   'COMMANDER' = 'commander',
@@ -15,6 +15,9 @@ enum CounterType {
 })
 export class PlayerBoardComponent implements OnInit {
   @Input() player: any;
+  @Input() nbPlayers: number;
+  public randomDiceToShow = 1;
+  public randomDiceAnimationIsActive = false;
   public isCounterFocused: boolean;
   public counterFocused: string;
   public counterType = CounterType;
@@ -37,6 +40,7 @@ export class PlayerBoardComponent implements OnInit {
     this.lifeCounterHistoricalIsShown = true;
     this.handleLifeHistorical();
   }
+
   removePlayerLife() {
     this.player.life -= 1;
     this.lifeCounterHistoricalRemove += 1;
@@ -104,5 +108,19 @@ export class PlayerBoardComponent implements OnInit {
       this.lifeCounterHistoricalRemove = 0;
       this.lifeCounterHistoricalIsAdd = false;
     }, 700);
+  }
+
+  randomizeAnimation() {
+    this.randomDiceAnimationIsActive = true;
+    const interval = setInterval(() => {
+      this.randomDiceToShow = Math.floor(1 + Math.random() * Math.floor(6));
+    }, 70);
+    setTimeout(() => {
+      clearInterval(interval);
+      this.randomDiceToShow = this.player.order;
+      setTimeout(() => {
+        this.randomDiceAnimationIsActive = false;
+      }, 2000);
+    }, 2000);
   }
 }
