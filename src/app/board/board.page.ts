@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { AlertController } from '@ionic/angular';
@@ -9,7 +9,7 @@ import { PlayerBoardComponent } from '../player-board/player-board.component';
   templateUrl: './board.page.html',
   styleUrls: ['./board.page.scss'],
 })
-export class BoardPage implements OnInit {
+export class BoardPage implements OnInit, OnDestroy {
   @ViewChildren(PlayerBoardComponent)
   private playerBoardComponents: QueryList<PlayerBoardComponent>;
   public players = [];
@@ -47,7 +47,6 @@ export class BoardPage implements OnInit {
       );
     }
     this.getTimeModeDatas();
-    this.handleTimeModeCountdown();
 
     this.nbPlayersCeiledByTwo = Math.ceil(this.players.length / 2);
     if (this.players.length === 2) {
@@ -61,6 +60,10 @@ export class BoardPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.timeModeInterval);
   }
 
   async handleReset() {
@@ -86,6 +89,7 @@ export class BoardPage implements OnInit {
                 player.tokenCounter = 0;
               }
               this.getTimeModeDatas();
+              clearInterval(this.timeModeInterval);
               this.timeModeIsRunning = false;
             }
           }
@@ -96,10 +100,17 @@ export class BoardPage implements OnInit {
 
   handlePlayTimeMode() {
     this.timeModeIsRunning = !this.timeModeIsRunning;
+    if (this.timeModeIsRunning) {
+      this.handleTimeModeCountdown();
+    } else {
+      clearInterval(this.timeModeInterval);
+    }
   }
 
   handleNextPlayerCountdown() {
     if (this.timeModeInterval) {
+      this.timeModeIsRunning = true;
+      this.vibration.vibrate(200);
       clearInterval(this.timeModeInterval);
       this.getTimeModeDatas();
       this.handleTimeModeCountdown();
