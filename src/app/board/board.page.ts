@@ -23,7 +23,8 @@ export class BoardPage implements OnInit {
   lifeSetting: number;
   heartBeatModeIsActive: boolean;
   timeModeInterval: any;
-  timeModeIsRunning;
+  timeModeIsRunning = false;
+  animationIsRunning = false;
   timeModeIsActive: boolean;
 
   constructor(private store: Store<undefined>,
@@ -37,7 +38,6 @@ export class BoardPage implements OnInit {
     for (let i = 1; i <= this.nbPlayers; i++) {
       this.players.push(
         { id: i,
-          name: 'Player ' + i,
           life: this.lifeSetting,
           planeswalkerCounter: 0,
           commanderCounter: 0,
@@ -46,6 +46,7 @@ export class BoardPage implements OnInit {
           order: 0}
       );
     }
+    this.getTimeModeDatas();
     this.handleTimeModeCountdown();
 
     this.nbPlayersCeiledByTwo = Math.ceil(this.players.length / 2);
@@ -73,8 +74,6 @@ export class BoardPage implements OnInit {
             text: 'Cancel',
             role: 'cancel',
             cssClass: 'danger-button',
-            handler: () => {
-            }
           }, {
             text: 'Confirm',
             cssClass: 'primary-button',
@@ -87,6 +86,7 @@ export class BoardPage implements OnInit {
                 player.tokenCounter = 0;
               }
               this.getTimeModeDatas();
+              this.timeModeIsRunning = false;
             }
           }
         ]
@@ -131,15 +131,21 @@ export class BoardPage implements OnInit {
   }
 
   handleRandomizer() {
-    const playersArray = new Array(this.players.length).fill(0).map((x, i) => i + 1);
+    if (this.animationIsRunning === false) {
+      this.animationIsRunning = true;
+      const playersArray = new Array(this.players.length).fill(0).map((x, i) => i + 1);
 
-    for (const player of this.players) {
-      const rand = Math.floor(Math.random() * Math.floor(playersArray.length));
-      const order = playersArray[rand];
-      player.order = order;
-      playersArray.splice(playersArray.indexOf(order), 1);
+      for (const player of this.players) {
+        const rand = Math.floor(Math.random() * Math.floor(playersArray.length));
+        const order = playersArray[rand];
+        player.order = order;
+        playersArray.splice(playersArray.indexOf(order), 1);
+      }
+
+      this.playerBoardComponents.map((playerBoardComponent => playerBoardComponent.randomizeAnimation()));
+      setTimeout(() => {
+        this.animationIsRunning = false;
+      }, 4000);
     }
-
-    this.playerBoardComponents.map((playerBoardComponent => playerBoardComponent.randomizeAnimation()));
   }
 }

@@ -26,6 +26,7 @@ export class PlayerBoardComponent implements OnInit {
   public lifeCounterHistoricalAdd = 0;
   public lifeCounterHistoricalRemove = 0;
   public lifeCounterTimeOut: any;
+  public playerName: string;
 
   constructor() {
     this.isCounterFocused = false;
@@ -122,5 +123,9 @@ export class PlayerBoardComponent implements OnInit {
         this.randomDiceAnimationIsActive = false;
       }, 2000);
     }, 2000);
+  }
+
+  handleNameChange(event) {
+    this.player.name = event.target.value;
   }
 }

@@ -19,7 +19,7 @@ export class ListPage implements OnInit {
   public timeModeIsActive: boolean;
   public heartBeatModeIsActive: boolean;
 
-  constructor(private store: Store<{ nbPlayers: number }>) {
+  constructor(private store: Store<any>) {
     store.pipe(select('nbPlayers')).subscribe(nbPlayers => this.nbPlayersRangeValue = nbPlayers.nbPlayers);
     store.pipe(select('lifeSetting')).subscribe(lifeSetting => this.lifeSettingRangeValue = lifeSetting.lifeSetting);
     store.pipe(select('heartBeatMode')).subscribe(heartBeatMode => this.heartBeatModeIsActive = heartBeatMode.isActive);

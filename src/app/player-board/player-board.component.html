@@ -1,8 +1,8 @@
 <div class="player-board-container" *ngIf="randomDiceAnimationIsActive === false ; else dicesAnimation">
     <div class="player-container-name">
-      <ion-input class="player-name" [placeholder]="'Player ' + player.id" *ngIf="!lifeCounterHistoricalIsShown; else lifeCounterHistorical"></ion-input>
+      <ion-input class="player-name" [placeholder]="'Player ' + player.id" [value]="player.name" *ngIf="!lifeCounterHistoricalIsShown; else lifeCounterHistorical" (change)="handleNameChange($event)"></ion-input>
         <ng-template #lifeCounterHistorical>
-            <ion-text *ngIf="lifeCounterHistoricalIsShown" [color]="lifeCounterHistoricalIsAdd ? 'primary' : 'danger'">
+            <ion-text [color]="lifeCounterHistoricalIsAdd ? 'primary' : 'danger'">
                 {{lifeCounterHistoricalIsAdd ? '+' + lifeCounterHistoricalAdd : '-'+lifeCounterHistoricalRemove}}
             </ion-text>
         </ng-template>
