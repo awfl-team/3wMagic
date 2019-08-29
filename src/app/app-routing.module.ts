@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'settings',
-    loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
+    loadChildren: () => import('./sidebar/sidebar.module').then(m => m.SidebarPageModule)
   },
   { path: 'board', loadChildren: './board/board.module#BoardPageModule' }
 ];

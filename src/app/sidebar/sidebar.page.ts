@@ -7,10 +7,9 @@ import { updateTimeModeIsActive, updateTurnTimeSet } from '../actions/timeMode.a
 
 @Component({
   selector: 'app-list',
-  templateUrl: 'list.page.html',
-  styleUrls: ['list.page.scss']
+  templateUrl: 'sidebar.page.html',
 })
-export class ListPage implements OnInit {
+export class SidebarPage implements OnInit {
   public nbPlayersRangeValue: number;
   public lifeSettingRangeValue: number;
   public turnTimeSet: number;

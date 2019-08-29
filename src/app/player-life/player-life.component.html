@@ -1,0 +1,19 @@
+<div class="player-container-name">
+  <ion-input class="player-name" [placeholder]="'Player ' + player.id" [value]="player.name" *ngIf="!lifeCounterHistoricalIsShown; else lifeCounterHistorical" (change)="handleNameChange($event)"></ion-input>
+  <ng-template #lifeCounterHistorical>
+    <ion-text [color]="lifeCounterHistoricalIsAdd ? 'primary' : 'danger'">
+      {{lifeCounterHistoricalIsAdd ? '+' + lifeCounterHistoricalAdd : '-'+lifeCounterHistoricalRemove}}
+    </ion-text>
+  </ng-template>
+</div>
+<div class="player-container-action-life">
+  <ion-fab-button class="life-button-remove" [disabled]="player.life <= 0" (click)="removePlayerLife()">
+    <ion-icon name="remove"></ion-icon>
+  </ion-fab-button>
+  <ion-text class="player-life" *ngIf="player.life > 0">{{player.life}}</ion-text>
+  <ion-img class="player-life-icon" *ngIf="player.life === 0"
+           src="./assets/icon/mtgSet/skull.svg"></ion-img>
+  <ion-fab-button class="life-button-add" (click)="addPlayerLife()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</div>

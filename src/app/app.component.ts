@@ -16,12 +16,12 @@ export class AppComponent {
     {
       title: 'Board',
       url: '/board',
-      icon: 'home'
+      icon: 'apps'
     },
     {
       title: 'Settings',
       url: '/settings',
-      icon: 'cog'
+      icon: 'options'
     }
   ];
 
@@ -39,7 +39,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.hide();
       this.splashScreen.hide();
-      this.insomnia.keepAwake()
+      this.insomnia.keepAwake();
       this.navigationBar.setUp(true);
     });
   }

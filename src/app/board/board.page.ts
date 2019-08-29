@@ -7,7 +7,6 @@ import { PlayerBoardComponent } from '../player-board/player-board.component';
 @Component({
   selector: 'app-board',
   templateUrl: './board.page.html',
-  styleUrls: ['./board.page.scss'],
 })
 export class BoardPage implements OnInit, OnDestroy {
   @ViewChildren(PlayerBoardComponent)
@@ -31,9 +30,12 @@ export class BoardPage implements OnInit, OnDestroy {
               private vibration: Vibration,
               private alertController: AlertController,
   ) {
-    store.pipe(select('nbPlayers')).subscribe(nbPlayers => this.nbPlayers = nbPlayers.nbPlayers);
-    store.pipe(select('heartBeatMode')).subscribe(heartBeatMode => this.heartBeatModeIsActive = heartBeatMode.isActive);
-    store.pipe(select('lifeSetting')).subscribe(lifeSetting => this.lifeSetting = lifeSetting.lifeSetting);
+  }
+
+  ngOnInit() {
+    this.store.pipe(select('nbPlayers')).subscribe(nbPlayers => this.nbPlayers = nbPlayers.nbPlayers);
+    this.store.pipe(select('heartBeatMode')).subscribe(heartBeatMode => this.heartBeatModeIsActive = heartBeatMode.isActive);
+    this.store.pipe(select('lifeSetting')).subscribe(lifeSetting => this.lifeSetting = lifeSetting.lifeSetting);
     this.getTimeModeDatas();
     for (let i = 1; i <= this.nbPlayers; i++) {
       this.players.push(
@@ -57,9 +59,6 @@ export class BoardPage implements OnInit, OnDestroy {
       this.playerBoardHeight = 100 / this.nbPlayersCeiledByTwo;
       this.playerBoardHeightInner = 120 / this.nbPlayersCeiledByTwo;
     }
-  }
-
-  ngOnInit() {
   }
 
   ngOnDestroy() {
