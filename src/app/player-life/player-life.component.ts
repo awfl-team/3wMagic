@@ -19,6 +19,7 @@ export class PlayerLifeComponent implements OnInit {
   addPlayerLife() {
     this.player.life += 1;
     this.lifeCounterHistoricalAdd += 1;
+    this.lifeCounterHistoricalRemove = 0;
     this.lifeCounterHistoricalIsAdd = true;
     this.lifeCounterHistoricalIsShown = true;
     this.handleLifeHistorical();
@@ -26,6 +27,7 @@ export class PlayerLifeComponent implements OnInit {
 
   removePlayerLife() {
     this.player.life -= 1;
+    this.lifeCounterHistoricalAdd = 0;
     this.lifeCounterHistoricalRemove += 1;
     this.lifeCounterHistoricalIsAdd = false;
     this.lifeCounterHistoricalIsShown = true;
