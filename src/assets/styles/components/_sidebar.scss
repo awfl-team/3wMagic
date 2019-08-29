@@ -3,4 +3,15 @@ ion-content {
 }
 ion-list {
   padding: 0 !important;
+
+  ion-label {
+    text-overflow: unset !important;
+    white-space: pre-wrap !important;
+  }
+}
+
+.item-note {
+  width: 65px;
+  margin-left: 30px;
+  text-align: center;
 }

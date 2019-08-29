@@ -11,6 +11,7 @@ import { updateTimeModeIsActive, updateTurnTimeSet } from '../actions/timeMode.a
 })
 export class SidebarPage implements OnInit {
   public nbPlayersRangeValue: number;
+  public maxNbPlayers: number;
   public lifeSettingRangeValue: number;
   public turnTimeSet: number;
   public turnTimeMinute: number;
@@ -31,7 +32,13 @@ export class SidebarPage implements OnInit {
   }
 
   ngOnInit() {
-
+    if (window.innerHeight <= 730 && window.innerWidth >= 350) {
+      this.maxNbPlayers = 4;
+    } else if (window.innerHeight <= 730 || window.innerWidth <= 350) {
+      this.maxNbPlayers = 2;
+    } else {
+      this.maxNbPlayers = 6;
+    }
   }
 
   handleNbPlayersChange(event) {

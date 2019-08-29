@@ -13,7 +13,7 @@
   <ion-list color="dark">
     <ion-item color="dark">
       <ion-icon name="people" slot="start"></ion-icon>
-      <ion-range min="1" max="6" step="1" [value]="nbPlayersRangeValue" snaps="true"
+      <ion-range min="1" [max]="maxNbPlayers" step="1" [value]="nbPlayersRangeValue" snaps="true"
                  (ionChange)="handleNbPlayersChange($event)"></ion-range>
       <div class="item-note" slot="end">
         <ion-text>{{nbPlayersRangeValue}}</ion-text>
